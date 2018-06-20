@@ -17,7 +17,7 @@ Notes
 Tools
 -----
 
-Host-Side tools for creating SPIFS partition images exist and one such tool is `mkspiffs <https://github.com/igrr/mkspiffs>`_.
+Host-Side tools for creating SPIFS partition images exist and one such tool is `mkspiffs <https://github.com/igrr/mkspiffs/releases>` (look for *-esp-idf-*) (See mkspiffs NOTES).
 You can use it to create image from a given folder and then flash that image with ``esptool.py``
 
 To do that you need to obtain some parameters:
@@ -34,6 +34,22 @@ To pack a folder into 1 Megabyte image::
 To flash the image to ESP32 at offset 0x110000::
 
     python esptool.py --chip esp32 --port [port] --baud [baud] write_flash -z 0x110000 spiffs.bin
+
+mkspiffs Notes
+--------
+If you are building mkspiffs make sure
+
+    CONFIG_SPIFFS_OBJ_NAME_LEN
+    
+    CONFIG_SPIFFS_USE_MAGIC
+    
+    CONFIG_SPIFFS_USE_MAGIC_LENGTH
+    
+    CONFIG_SPIFFS_META_LENGTH
+
+
+Matches what is reported by ``mkspiffs --version``
+
 
 See also
 --------
